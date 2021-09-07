@@ -6,16 +6,11 @@ import pytz
 utc = pytz.UTC
 s3 = boto3.client('s3')
 
-BUCKET_NAME = 's1-gov-stage-k8-clusters'
+BUCKET_NAME = ''
 TARGET_DATE = utc.localize(datetime.datetime(2021,8,9))
 NEW_FILE_STR = 'no_version_id_can_match_my_power'
-SKIP_LIST = ['gov-cloud-stage.k8s.local/backups/', 'gov-jenkins-stage.k8s.local/']
+SKIP_LIST = ['folder-to-skip', 'folder-to-skip-1']
 
-
-# for testing
-# BUCKET_NAME = 'neelk-test'
-# test_obj='gov-cloud-stage.k8s.local/instancegroup/ares-kafka-stage-gov'
-# TARGET_DATE = utc.localize(datetime.datetime(2021,8,11,23,34))
 
 def get_latest_version_before(versions, target_date):
     version_ids = [ version['VersionId'] for version in versions if version['LastModified'] < target_date]
